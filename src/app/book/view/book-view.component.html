@@ -1,0 +1,23 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Retour">navigate_before</mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+
+    <div *ngIf="responsive.isLargeScreen">
+        <a mat-raised-button color="accent" routerLink="/books/edit/{{book.id}}">
+            <mat-icon>edit</mat-icon>
+            Modifier
+        </a>
+        <a mat-raised-button color="warn" (click)="delete()">
+            <mat-icon>delete</mat-icon>
+            Supprimer
+        </a>
+    </div>
+</mat-toolbar>
+
+<div class="body-content">
+    <h1>{{ book.name }}</h1>
+    <img class="cover" src="{{ book.cover }}">
+</div>

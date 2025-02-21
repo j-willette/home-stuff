@@ -1,0 +1,23 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Retour">navigate_before</mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+
+    <div *ngIf="responsive.isLargeScreen">
+        <a mat-raised-button color="accent" routerLink="/cds/edit/{{cd.id}}">
+            <mat-icon>edit</mat-icon>
+            Modifier
+        </a>
+        <a mat-raised-button color="warn" (click)="delete()">
+            <mat-icon>delete</mat-icon>
+            Supprimer
+        </a>
+    </div>
+</mat-toolbar>
+
+<div class="body-content">
+    <h1>{{ cd.name }}</h1>
+    <img class="cover" src="{{ cd.cover }}">
+</div>

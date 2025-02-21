@@ -1,0 +1,59 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Retour au livre">navigate_before</mat-icon>
+    </button>
+</mat-toolbar>
+
+<div class="body-content">
+    <h2>Editer {{ bookFormService.book.name }}</h2>
+
+    <form [formGroup]="bookFormService.bookForm" (ngSubmit)="bookFormService.save('save')">
+        <div>
+            <mat-form-field>
+                <mat-select formControlName="type" placeholder="Type">
+                    <mat-option value="oneshot">One shot</mat-option>
+                    <mat-option value="serie">Série</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field *ngIf="bookFormService.bookForm.get('type').value === 'serie'">
+                <mat-select formControlName="serie" (ngModelChange)="bookFormService.changeSerie($event)" placeholder="Série">
+                    <mat-option value=""></mat-option>
+                    <mat-option *ngFor="let serie of bookFormService.series;" [value]="serie.id">{{ serie.name }}</mat-option>
+                </mat-select>
+                <input type="hidden" formControlName="group">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field *ngIf="bookFormService.bookForm.get('type').value !== 'serie'">
+                <mat-select formControlName="group" placeholder="Groupe">
+                    <mat-option value=""></mat-option>
+                    <mat-option *ngFor="let group of bookFormService.groups" [value]="group">{{ group }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Nom" formControlName="name">
+            </mat-form-field>
+        </div>
+        <div>
+            {{ bookFormService.book.cover_internal_ref }}
+        </div>
+        <div>
+            <img class="cover" src="{{ bookFormService.book.cover }}">
+            <img class="cover" *ngIf="bookFormService.file.uploaded" src="{{ bookFormService.file.url }}">
+        </div>
+        <div>
+            <button (click)="fileInput.click()" type="button">
+                <mat-icon>library_add</mat-icon>
+                <span>Modifier la couverture</span>
+                <input #fileInput type="file" accept="image/*" (change)="bookFormService.detectFiles($event)" style="display:none;" />
+            </button>
+        </div>
+        <div>
+            <button mat-raised-button color="accent" [disabled]="bookFormService.bookForm.invalid || bookFormService.file.isUploading && !bookFormService.file.uploaded" type="submit">Enregistrer</button>
+        </div>
+    </form>
+</div>

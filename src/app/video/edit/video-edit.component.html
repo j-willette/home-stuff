@@ -1,0 +1,50 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Retour au livre">navigate_before</mat-icon>
+    </button>
+</mat-toolbar>
+
+<div class="body-content">
+    <h2>Editer {{ videoFormService.video.name }}</h2>
+
+    <form [formGroup]="videoFormService.videoForm" (ngSubmit)="videoFormService.save('save')">
+        <div>
+            <mat-form-field>
+                <mat-select formControlName="group" placeholder="Groupe">
+                    <mat-option value=""></mat-option>
+                    <mat-option *ngFor="let group of videoFormService.groups" [value]="group">{{ group }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-select formControlName="medium" placeholder="Support">
+                    <mat-option value=""></mat-option>
+                    <mat-option *ngFor="let medium of videoFormService.mediums" [value]="medium">{{ medium }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Nom" formControlName="name">
+            </mat-form-field>
+        </div>
+        <div>
+            {{ videoFormService.video.cover_internal_ref }}
+        </div>
+        <div>
+            <img class="cover" src="{{ videoFormService.video.cover }}">
+            <img class="cover" *ngIf="videoFormService.fileService.uploaded" src="{{ videoFormService.fileService.url }}">
+        </div>
+        <div>
+            <button (click)="fileInput.click()" type="button">
+                <mat-icon>library_add</mat-icon>
+                <span>Modifier la couverture</span>
+                <input #fileInput type="file" accept="image/*" (change)="videoFormService.detectFiles($event)" style="display:none;" />
+            </button>
+        </div>
+        <div>
+            <button mat-raised-button color="accent" [disabled]="videoFormService.videoForm.invalid || videoFormService.fileService.isUploading && !videoFormService.fileService.uploaded" type="submit">Enregistrer</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,43 @@
+<mat-toolbar>
+    <mat-nav-list *ngIf="responsive.isLargeScreen">
+        <a mat-list-item routerLinkActive="active" routerLink="/games" [routerLinkActiveOptions]="{exact:true}">Tous</a>
+        <a mat-list-item routerLinkActive="active" *ngFor="let group of consoles;" routerLink="/games/{{ group | lowercase }}">{{ group }}</a>
+    </mat-nav-list>
+
+    <div *ngIf="!responsive.isLargeScreen" class="mobile-filters">
+        <mat-menu #appMenu="matMenu">
+            <a mat-menu-item routerLinkActive="active" routerLink="/games" [routerLinkActiveOptions]="{exact:true}">Tous</a>
+            <a mat-menu-item routerLinkActive="active" *ngFor="let group of consoles;" routerLink="/games/{{ group | lowercase }}">{{ group }}</a>
+        </mat-menu>
+
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+            <mat-icon>filter_list</mat-icon>
+        </button>
+
+        <span>{{ getCurrentGroup() || 'Tous' }}</span>
+    </div>
+
+    <span>({{ games.length }})</span>
+
+    <span class="spacer"></span>
+
+    <div *ngIf="responsive.isLargeScreen">
+        <a mat-raised-button color="primary" routerLink="/games/new">
+            <mat-icon>add</mat-icon>
+            Jeu
+        </a>
+    </div>
+</mat-toolbar>
+
+<div class="body-content">
+    <ul class="entries">
+        <li class="entry oneshot-entry" *ngFor="let game of gamesDisplay | keyvalue">
+            <div>
+                <a [routerLink]="['/games', 'view', game.value.id]">
+                    <span class="cover" [ngStyle]="{'backgroundImage': 'url(' + game.value.cover + ')' }"></span>
+                    <span class="name">{{ game.value.name }}</span>
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>

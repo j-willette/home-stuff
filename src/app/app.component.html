@@ -1,0 +1,48 @@
+<mat-toolbar [ngClass]="getPrimaryColorClass()">
+    <button mat-icon-button *ngIf="!responsive.isLargeScreen" (click)="toggleSidebar()">
+        <mat-icon aria-label="Show menu">menu</mat-icon>
+    </button>
+
+    <span>Home</span>
+
+    <span class="spacer"></span>
+
+    <div *ngIf="isAuth">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <app-headermenu [currentRoute]="getRoute()"></app-headermenu>
+
+            <button mat-menu-item (click)="onSignOut()">
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Déconnexion</span>
+            </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>
+
+
+<mat-sidenav-container>
+    <mat-sidenav [mode]="sidebar.mode" [(opened)]="sidebar.opened" *ngIf="isAuth" [ngClass]="getPrimaryColorClass()">
+        <!--<div class="collapse-buttons">-->
+            <!--<button mat-icon-button *ngIf="!navModeExpand" (click)="toggleNavMode()">-->
+                <!--<mat-icon aria-label="Collapse menu">navigate_next</mat-icon>-->
+            <!--</button>-->
+            <!--<button mat-icon-button *ngIf="navModeExpand" (click)="toggleNavMode()">-->
+                <!--<mat-icon aria-label="Expand menu">navigate_before</mat-icon>-->
+            <!--</button>-->
+        <!--</div>-->
+        <mat-nav-list [ngClass]="{'collapse': !navModeExpand}">
+            <a *ngFor="let navItem of sidebar.items" mat-list-item routerLinkActive="active" [ngClass]="[navItem.className]" routerLink="{{ navItem.link }}" (click)="toggleSidebar()">
+                <mat-icon>{{ navItem.icon }}</mat-icon>
+                <span>{{ navItem.text }}</span>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="container" style="display: block;">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

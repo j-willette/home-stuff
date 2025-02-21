@@ -1,0 +1,42 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Retour au livre">navigate_before</mat-icon>
+    </button>
+</mat-toolbar>
+
+<div class="body-content">
+    <h2>Editer {{ gameFormService.game.name }}</h2>
+
+    <form [formGroup]="gameFormService.gameForm" (ngSubmit)="gameFormService.save('save')">
+        <div>
+            <mat-form-field>
+                <mat-select formControlName="console" placeholder="Console">
+                    <mat-option value=""></mat-option>
+                    <mat-option *ngFor="let console of gameFormService.consoles" [value]="console">{{ console }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Nom" formControlName="name">
+            </mat-form-field>
+        </div>
+        <div>
+            {{ gameFormService.game.cover_internal_ref }}
+        </div>
+        <div>
+            <img class="cover" src="{{ gameFormService.game.cover }}">
+            <img class="cover" *ngIf="gameFormService.fileService.uploaded" src="{{ gameFormService.fileService.url }}">
+        </div>
+        <div>
+            <button (click)="fileInput.click()" type="button">
+                <mat-icon>library_add</mat-icon>
+                <span>Modifier la couverture</span>
+                <input #fileInput type="file" accept="image/*" (change)="gameFormService.detectFiles($event)" style="display:none;" />
+            </button>
+        </div>
+        <div>
+            <button mat-raised-button color="accent" [disabled]="gameFormService.gameForm.invalid || gameFormService.fileService.isUploading && !gameFormService.fileService.uploaded" type="submit">Enregistrer</button>
+        </div>
+    </form>
+</div>

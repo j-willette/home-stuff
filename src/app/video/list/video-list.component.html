@@ -1,0 +1,44 @@
+<mat-toolbar>
+    <mat-nav-list *ngIf="responsive.isLargeScreen">
+        <a mat-list-item routerLinkActive="active" routerLink="/videos" [routerLinkActiveOptions]="{exact:true}">Tous</a>
+        <a mat-list-item routerLinkActive="active" *ngFor="let group of groups;" routerLink="/videos/{{ group | lowercase }}">{{ group }}</a>
+    </mat-nav-list>
+
+    <div *ngIf="!responsive.isLargeScreen" class="mobile-filters">
+        <mat-menu #appMenu="matMenu">
+            <a mat-menu-item routerLinkActive="active" routerLink="/videos" [routerLinkActiveOptions]="{exact:true}">Tous</a>
+            <a mat-menu-item routerLinkActive="active" *ngFor="let group of groups;" routerLink="/videos/{{ group | lowercase }}">{{ group }}</a>
+        </mat-menu>
+
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+            <mat-icon>filter_list</mat-icon>
+        </button>
+
+        <span>{{ getCurrentGroup() || 'Tous' }}</span>
+    </div>
+
+    <span>({{ videos.length }})</span>
+
+    <span class="spacer"></span>
+
+    <div *ngIf="responsive.isLargeScreen">
+        <a mat-raised-button color="primary" routerLink="/videos/new">
+            <mat-icon>add</mat-icon>
+            Vidéo
+        </a>
+    </div>
+</mat-toolbar>
+
+<div class="body-content">
+    <ul class="entries">
+        <li class="entry oneshot-entry" *ngFor="let video of videosDisplay | keyvalue">
+            <div>
+                <a [routerLink]="['/videos', 'view', video.value.id]">
+                    <span class="ico-{{ video.value.medium | lowercase }}"></span>
+                    <span class="cover" [ngStyle]="{'backgroundImage': 'url(' + video.value.cover + ')' }"></span>
+                    <span class="name">{{ video.value.name }}</span>
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>

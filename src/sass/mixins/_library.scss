@@ -1,0 +1,85 @@
+@mixin list($color) {
+    .entries {
+        list-style: none;
+        display: flex;
+        padding: 0;
+        margin: 0;
+        flex-wrap: wrap;
+
+        .entry {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            font-size: 14px;
+            font-weight: normal;
+
+            width: 100 / 2 * 1%;
+
+            @include r($screen__s) {
+                width: 100 / 3 * 1%;
+            }
+
+            @include r($screen__m) {
+                width: 100 / 4 * 1%;
+            }
+
+            @include r($screen__l) {
+                width: 100 / 6 * 1%;
+            }
+
+            @include r($screen__xl) {
+                width: 100 / 9 * 1%;
+            }
+
+            > div {
+                position: relative;
+                overflow: hidden;
+                margin: 7px 7px 15px 7px;
+                background: $color;
+                border: 5px solid $color;
+            }
+
+            .cover {
+                display: block;
+                padding-bottom: 150%;
+                background-size: cover;
+                background-position: center top;
+            }
+
+            .ico-serie {
+                position: absolute;
+                content: "";
+                top: -27px;
+                left: -6px;
+                width: 40px;
+                height: 80px;
+                background: $color;
+                z-index: 1;
+                transform: rotate(45deg);
+
+                .mat-icon {
+                    transform: rotate(-45deg) translate(-18px, 20px);
+                }
+            }
+
+            .name {
+                display: block;
+                margin-top: 5px;
+                padding: 3px 0;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            a {
+                display: block;
+                text-decoration: none;
+                color: #fff;
+
+                &:hover {
+                    opacity: .75;
+                }
+            }
+        }
+    }
+}

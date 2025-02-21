@@ -1,0 +1,31 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Retour à la vidéothèque">navigate_before</mat-icon>
+    </button>
+</mat-toolbar>
+
+<div class="body-content">
+    <h2>Enregistrer un nouveau CD</h2>
+
+    <form [formGroup]="cdFormService.cdForm" (ngSubmit)="cdFormService.save('save')">
+        <div>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Nom" formControlName="name">
+            </mat-form-field>
+        </div>
+        <div>
+            <button (click)="fileInput.click()" type="button">
+                <mat-icon>library_add</mat-icon>
+                <span>Ajouter une couverture</span>
+                <input #fileInput type="file" accept="image/*" (change)="cdFormService.detectFiles($event)" style="display:none;" />
+            </button>
+        </div>
+        <div>
+            <button mat-raised-button color="accent" [disabled]="cdFormService.cdForm.invalid || !cdFormService.fileService.uploaded" type="submit">Enregistrer</button>
+            <button mat-raised-button color="primary" [disabled]="cdFormService.cdForm.invalid || !cdFormService.fileService.uploaded" type="button" (click)="cdFormService.save('savecontinue')">Enregistrer et continuer</button>
+        </div>
+        <div *ngIf="cdFormService.fileService.uploaded">
+            <img src="{{ cdFormService.fileService.url }}" width="200">
+        </div>
+    </form>
+</div>

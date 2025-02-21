@@ -1,0 +1,15 @@
+@import "~src/sass/includes";
+
+.cover {
+    max-height: 500px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.mat-toolbar {
+    .mat-raised-button {
+        margin-left: 10px;
+    }
+}

@@ -1,0 +1,9 @@
+@mixin r($break, $extremum: 'min') {
+    @if $extremum == 'min' {
+        $break: $break + 1;
+    }
+
+    @media ( #{$extremum}-width: $break ) {
+        @content;
+    }
+}

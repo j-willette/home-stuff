@@ -1,0 +1,24 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Retour">navigate_before</mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+
+    <div *ngIf="responsive.isLargeScreen">
+        <a mat-raised-button color="accent" routerLink="/games/edit/{{game.id}}">
+            <mat-icon>edit</mat-icon>
+            Modifier
+        </a>
+        <a mat-raised-button color="warn" (click)="delete()">
+            <mat-icon>delete</mat-icon>
+            Supprimer
+        </a>
+    </div>
+</mat-toolbar>
+
+<div class="body-content">
+    <h1>{{ game.name }}</h1>
+    <p>({{ game.console }})</p>
+    <img class="cover" src="{{ game.cover }}">
+</div>

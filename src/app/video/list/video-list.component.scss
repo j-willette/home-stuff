@@ -1,0 +1,44 @@
+@import "~src/sass/includes";
+
+:host {
+    flex: 1;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.mobile-filters {
+    @include vcenter;
+    display: flex;
+    margin-right: 10px;
+}
+
+@include list($video-primary-color);
+
+.entries {
+    .entry {
+        .ico-blu-ray {
+            position: absolute;
+            content: "";
+            top: -27px;
+            left: -6px;
+            width: 40px;
+            height: 80px;
+            background: #3a67b7;
+            z-index: 1;
+            transform: rotate(45deg);
+        }
+        .ico-dvd {
+            position: absolute;
+            content: "";
+            top: -27px;
+            left: -6px;
+            width: 40px;
+            height: 80px;
+            background: brown;
+            z-index: 1;
+            transform: rotate(45deg);
+        }
+    }
+}

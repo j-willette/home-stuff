@@ -1,0 +1,33 @@
+@import "~src/sass/includes";
+
+:host {
+    flex: 1;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 100px;
+
+    @include r($screen__m) {
+        margin-top: 150px;
+    }
+}
+
+form {
+    max-width: 500px;
+    margin: auto;
+    padding: 0 20px;
+
+    .mat-form-field, input {
+        width: 100%;
+    }
+
+    .btn-wrapper {
+        text-align: center;
+    }
+
+    .error-wrapper {
+        margin-top: 20px;
+        text-align: center;
+    }
+}

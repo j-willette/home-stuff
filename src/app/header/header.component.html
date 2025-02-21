@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <span>Home</span>
+
+    <span class="spacer"></span>
+
+    <!--<div routerLinkActive="active" *ngIf="!isAuth">-->
+        <!--<a routerLink="auth/signin">Connexion</a>-->
+    <!--</div>-->
+    <div routerLinkActive="active" *ngIf="isAuth">
+        <a href="" (click)="onSignOut()">Déconnexion</a>
+    </div>
+</mat-toolbar>

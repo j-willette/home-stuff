@@ -1,0 +1,39 @@
+.mat-sidenav-content .mat-toolbar {
+    height: 48px;
+
+    .mat-nav-list {
+        display: flex;
+        padding-top: 0;
+
+        .mat-list-item {
+            font-size: 14px;
+
+            &.active {
+                color: #673ab7;
+            }
+        }
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+    }
+
+    .mat-raised-button {
+        margin-left: 10px;
+    }
+}
+
+.body-content {
+    padding: 5px;
+
+    @include r($screen__m) {
+        padding: 20px;
+    }
+}

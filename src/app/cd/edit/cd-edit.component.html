@@ -1,0 +1,34 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Retour au livre">navigate_before</mat-icon>
+    </button>
+</mat-toolbar>
+
+<div class="body-content">
+    <h2>Editer {{ cdFormService.cd.name }}</h2>
+
+    <form [formGroup]="cdFormService.cdForm" (ngSubmit)="cdFormService.save('save')">
+        <div>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Nom" formControlName="name">
+            </mat-form-field>
+        </div>
+        <div>
+            {{ cdFormService.cd.cover_internal_ref }}
+        </div>
+        <div>
+            <img class="cover" src="{{ cdFormService.cd.cover }}">
+            <img class="cover" *ngIf="cdFormService.fileService.uploaded" src="{{ cdFormService.fileService.url }}">
+        </div>
+        <div>
+            <button (click)="fileInput.click()" type="button">
+                <mat-icon>library_add</mat-icon>
+                <span>Modifier la couverture</span>
+                <input #fileInput type="file" accept="image/*" (change)="cdFormService.detectFiles($event)" style="display:none;" />
+            </button>
+        </div>
+        <div>
+            <button mat-raised-button color="accent" [disabled]="cdFormService.cdForm.invalid || cdFormService.fileService.isUploading && !cdFormService.fileService.uploaded" type="submit">Enregistrer</button>
+        </div>
+    </form>
+</div>

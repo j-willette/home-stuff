@@ -1,0 +1,37 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Back to list books">navigate_before</mat-icon>
+    </button>
+</mat-toolbar>
+
+<div class="body-content">
+    <h2>Créer une nouvelle série</h2>
+
+    <form [formGroup]="bookSerieFormService.serieForm" (ngSubmit)="bookSerieFormService.save()">
+        <div>
+            <mat-form-field>
+                <mat-select formControlName="group" placeholder="Groupe">
+                    <mat-option *ngFor="let group of bookSerieFormService.groups" [value]="group">{{ group }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Nom" formControlName="name">
+            </mat-form-field>
+        </div>
+        <div>
+            <button (click)="fileInput.click()" type="button">
+                <mat-icon>library_add</mat-icon>
+                <span>Select</span>
+                <input #fileInput type="file" accept="image/*" (change)="bookSerieFormService.detectFiles($event)" style="display:none;" />
+            </button>
+        </div>
+        <div>
+            <button mat-raised-button color="accent" [disabled]="bookSerieFormService.serieForm.invalid || !bookSerieFormService.file.uploaded" type="submit">Enregistrer</button>
+        </div>
+        <div *ngIf="bookSerieFormService.file.uploaded">
+            <img src="{{ bookSerieFormService.file.url }}" width="200">
+        </div>
+    </form>
+</div>
