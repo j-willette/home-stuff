@@ -2,7 +2,7 @@
 
 ## 📝 À propos de ce projet
 
-Ce projet a été réalisé en **2017 avec Angular 7**, dans un contexte d’expérimentation personnelle.  
+Ce projet a été réalisé en **2018 avec Angular 7**, dans un contexte d’expérimentation personnelle.  
 Il a été développé en **environ une semaine**, dans le but de tester rapidement l’intégration de plusieurs fonctionnalités front-end sur une stack Angular.
 
 Le code reflète **les bonnes pratiques Angular en vigueur à l’époque**, avec un souci de clarté, de modularité et de structuration.  
